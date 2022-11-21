@@ -3,7 +3,12 @@ import 'package:my_account_book/core/models/case_model.dart';
 import 'package:my_account_book/ui/components/daily_case_component.dart';
 
 class DailyWidget extends StatelessWidget {
-  DailyWidget({super.key, required this.currentMonth});
+  DailyWidget({
+    super.key,
+    required this.currentYear,
+    required this.currentMonth,
+  });
+  int currentYear;
   int currentMonth;
 
   @override
@@ -58,7 +63,8 @@ class DailyWidget extends StatelessWidget {
       shrinkWrap: false,
       itemCount: dailyCase.length,
       itemBuilder: (context, index) {
-        if (dailyCase[index].caseModel[0].time.month == currentMonth) {
+        if (dailyCase[index].caseModel[0].time.month == currentMonth &&
+            dailyCase[index].caseModel[0].time.year == currentYear) {
           return dailyCase[index];
         } else {
           return const SizedBox();

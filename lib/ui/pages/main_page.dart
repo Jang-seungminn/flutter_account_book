@@ -67,6 +67,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               children: [
                 Center(
                     child: DailyWidget(
+                  currentYear: monthSelector.seletedYear,
                   currentMonth: monthSelector.selectedMonth,
                 )),
                 const Center(child: Text("weekly")),
