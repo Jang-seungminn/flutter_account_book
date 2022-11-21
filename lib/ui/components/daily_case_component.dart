@@ -31,22 +31,29 @@ class DailyCase extends StatelessWidget {
     }
     return Column(
       children: [
-        Text("수입 : $dailyIncome 지출 : $dailyExpenses"),
-        Expanded(
-          child: ListView.builder(
-            scrollDirection: Axis.vertical,
-            padding: const EdgeInsets.all(8),
-            itemCount: caseModel.length,
-            itemBuilder: ((context, index) {
-              return SizedBox(
-                height: 50,
-                child: Center(
-                  child: Text(
-                      "${caseModel[index].time} : ${caseModel[index].income} : ${caseModel[index].expenses}"),
-                ),
-              );
-            }),
+        Container(
+          constraints: const BoxConstraints.expand(height: 30),
+          alignment: Alignment.center,
+          color: Colors.lime,
+          child: Text(
+            "수입 : $dailyIncome 지출 : $dailyExpenses",
+            style: const TextStyle(fontSize: 18),
           ),
+        ),
+        ListView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          padding: const EdgeInsets.all(8),
+          itemCount: caseModel.length,
+          itemBuilder: ((context, index) {
+            return SizedBox(
+              height: 50,
+              child: Center(
+                child: Text(
+                    "${caseModel[index].time} : ${caseModel[index].income} : ${caseModel[index].expenses}"),
+              ),
+            );
+          }),
         ),
       ],
     );

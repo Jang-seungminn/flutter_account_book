@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MonthSelector extends StatefulWidget {
-  MonthSelector({super.key});
+  MonthSelector({super.key, required this.callback});
+  Function callback;
 
   int _selectedYear = DateTime.now().year;
   int get seletedYear => _selectedYear;
@@ -12,14 +13,6 @@ class MonthSelector extends StatefulWidget {
 }
 
 class _MonthSelectorState extends State<MonthSelector> {
-  int getSeletedYear() {
-    return widget.seletedYear;
-  }
-
-  int getSeletedMonth() {
-    return widget.seletedYear;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -34,6 +27,9 @@ class _MonthSelectorState extends State<MonthSelector> {
                 widget._selectedYear--;
                 widget._selectedMonth = 12;
               }
+              widget.callback(() {
+                return;
+              });
             });
           },
           iconSize: 30,
@@ -54,6 +50,9 @@ class _MonthSelectorState extends State<MonthSelector> {
                 widget._selectedYear++;
                 widget._selectedMonth = 1;
               }
+              widget.callback(() {
+                return;
+              });
             });
           },
           iconSize: 30,

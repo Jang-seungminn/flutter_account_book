@@ -12,12 +12,22 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   late TabController _tabController;
   late MonthSelector monthSelector;
-
   late List<Widget> tabs;
+  int selectedYear = 0;
+  int selectedMonth = 0;
+
+  changedMonth(Function func) {
+    setState(() {
+      func();
+    });
+  }
+
   @override
   void initState() {
     _tabController = TabController(length: 4, vsync: this);
-    monthSelector = MonthSelector();
+    monthSelector = MonthSelector(
+      callback: changedMonth,
+    );
     tabs = [
       const Text("daliy"),
       const Text("weekly"),
@@ -54,11 +64,14 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           Expanded(
             child: TabBarView(
               controller: _tabController,
-              children: const [
-                Center(child: DailyWidget()),
-                Center(child: Text("weekly")),
-                Center(child: Text("monthly")),
-                Center(child: Text("sammary")),
+              children: [
+                Center(
+                    child: DailyWidget(
+                  currentMonth: monthSelector.selectedMonth,
+                )),
+                const Center(child: Text("weekly")),
+                const Center(child: Text("monthly")),
+                const Center(child: Text("sammary")),
               ],
             ),
           )

@@ -3,37 +3,67 @@ import 'package:my_account_book/core/models/case_model.dart';
 import 'package:my_account_book/ui/components/daily_case_component.dart';
 
 class DailyWidget extends StatelessWidget {
-  const DailyWidget({super.key});
+  DailyWidget({super.key, required this.currentMonth});
+  int currentMonth;
 
   @override
   Widget build(BuildContext context) {
-    return DailyCase(
-      caseModel: [
-        CaseModel()
-          ..income = 0
-          ..expenses = 50000
-          ..time = DateTime(2022, 11, 20, 22, 39),
-        CaseModel()
-          ..income = 5000
-          ..expenses = 0
-          ..time = DateTime(2022, 11, 20, 22, 12),
-        CaseModel()
-          ..income = 3000
-          ..expenses = 0
-          ..time = DateTime(2022, 11, 20, 22, 24),
-        CaseModel()
-          ..income = 0
-          ..expenses = 50000
-          ..time = DateTime(2022, 11, 20, 22, 22),
-      ],
-      // income: const [30000, 5000],
-      // expenses: const [50000, 3000],
-      // time: [
-      //   DateTime(2022, 11, 20, 22, 39),
-      //   DateTime(2022, 11, 20, 22, 57),
-      //   DateTime(2022, 11, 20, 22, 23),
-      //   DateTime(2022, 11, 20, 22, 40),
-      // ],
+    List<CaseModel> testModel = [
+      CaseModel()
+        ..income = 0
+        ..expenses = 50000
+        ..time = DateTime(2022, 11, 20, 22, 39),
+      CaseModel()
+        ..income = 5000
+        ..expenses = 0
+        ..time = DateTime(2022, 11, 20, 22, 12),
+      CaseModel()
+        ..income = 3000
+        ..expenses = 0
+        ..time = DateTime(2022, 11, 20, 22, 24),
+      CaseModel()
+        ..income = 0
+        ..expenses = 50000
+        ..time = DateTime(2022, 11, 20, 22, 22),
+    ];
+
+    List<CaseModel> testModel2 = [
+      CaseModel()
+        ..income = 5000
+        ..expenses = 0
+        ..time = DateTime(2022, 12, 21, 22, 12),
+      CaseModel()
+        ..income = 0
+        ..expenses = 50000
+        ..time = DateTime(2022, 12, 21, 22, 22),
+    ];
+    List<CaseModel> testModel3 = [
+      CaseModel()
+        ..income = 5000
+        ..expenses = 0
+        ..time = DateTime(2022, 10, 21, 22, 12),
+      CaseModel()
+        ..income = 0
+        ..expenses = 50000
+        ..time = DateTime(2022, 10, 21, 22, 22),
+    ];
+    List<DailyCase> dailyCase = [
+      DailyCase(caseModel: testModel),
+      DailyCase(caseModel: testModel2),
+      DailyCase(caseModel: testModel3)
+    ];
+
+    // return Text('$currentMonth');
+    return ListView.builder(
+      shrinkWrap: false,
+      itemCount: dailyCase.length,
+      itemBuilder: (context, index) {
+        if (dailyCase[index].caseModel[0].time.month == currentMonth) {
+          return dailyCase[index];
+        } else {
+          return const SizedBox();
+        }
+      },
     );
   }
 }
