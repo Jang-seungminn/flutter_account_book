@@ -17,19 +17,11 @@ class DailyWidget extends StatelessWidget {
       CaseModel()
         ..income = 0
         ..expenses = 50000
-        ..time = DateTime(2022, 11, 20, 22, 39),
+        ..time = DateTime(2022, 11, 26, 22, 39),
       CaseModel()
         ..income = 5000
         ..expenses = 0
-        ..time = DateTime(2022, 11, 20, 22, 12),
-      CaseModel()
-        ..income = 3000
-        ..expenses = 0
-        ..time = DateTime(2022, 11, 20, 22, 24),
-      CaseModel()
-        ..income = 0
-        ..expenses = 50000
-        ..time = DateTime(2022, 11, 20, 22, 22),
+        ..time = DateTime(2022, 11, 26, 22, 12),
     ];
 
     List<CaseModel> testModel2 = [
