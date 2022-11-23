@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_account_book/ui/components/month_selector_component.dart';
+import 'package:my_account_book/ui/pages/add_case_page.dart';
 import 'package:my_account_book/ui/widgets/daily_widget.dart';
 
 class MainPage extends StatefulWidget {
@@ -39,44 +40,58 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        children: [
-          monthSelector,
-          TabBar(
-            controller: _tabController,
-            tabs: tabs,
-            indicator: const BoxDecoration(
-              gradient: LinearGradient(
-                //배경 그라데이션 적용
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [
-                  Colors.blueAccent,
-                  Colors.pinkAccent,
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            monthSelector,
+            TabBar(
+              controller: _tabController,
+              tabs: tabs,
+              indicator: const BoxDecoration(
+                gradient: LinearGradient(
+                  //배경 그라데이션 적용
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [
+                    Colors.blueAccent,
+                    Colors.pinkAccent,
+                  ],
+                ),
+              ),
+              labelPadding: const EdgeInsets.all(8),
+              labelColor: Colors.black,
+              labelStyle: const TextStyle(fontSize: 15),
+            ),
+            Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  Center(
+                      child: DailyWidget(
+                    currentYear: monthSelector.seletedYear,
+                    currentMonth: monthSelector.selectedMonth,
+                  )),
+                  const Center(child: Text("weekly")),
+                  const Center(child: Text("monthly")),
+                  const Center(child: Text("sammary")),
                 ],
               ),
-            ),
-            labelPadding: const EdgeInsets.all(8),
-            labelColor: Colors.black,
-            labelStyle: const TextStyle(fontSize: 15),
-          ),
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: [
-                Center(
-                    child: DailyWidget(
-                  currentYear: monthSelector.seletedYear,
-                  currentMonth: monthSelector.selectedMonth,
-                )),
-                const Center(child: Text("weekly")),
-                const Center(child: Text("monthly")),
-                const Center(child: Text("sammary")),
-              ],
-            ),
-          )
-        ],
+            )
+          ],
+        ),
+      ),
+      floatingActionButton: IconButton(
+        iconSize: 40,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const AddCasePage()),
+          );
+        },
+        icon: const Icon(
+          Icons.add_circle,
+        ),
       ),
     );
   }
