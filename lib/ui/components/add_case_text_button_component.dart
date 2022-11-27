@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 
 class AddCaseTextButton extends StatelessWidget {
-  AddCaseTextButton(
-      {super.key, required this.content, required this.textColor});
+  AddCaseTextButton({
+    super.key,
+    required this.content,
+    required this.textColor,
+    required this.onPressed,
+    required this.isSelected,
+  });
   Color textColor;
   String content;
+  Function(String, bool) onPressed;
+  bool isSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +26,14 @@ class AddCaseTextButton extends StatelessWidget {
         border: Border.all(width: 1, color: textColor),
       ),
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          isSelected = !isSelected;
+          onPressed(content, isSelected);
+        },
         style: ButtonStyle(
+          backgroundColor: isSelected
+              ? MaterialStateColor.resolveWith((states) => textColorWithOpacity)
+              : null,
           overlayColor:
               MaterialStateColor.resolveWith((states) => textColorWithOpacity),
         ),
